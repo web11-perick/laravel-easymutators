@@ -1,8 +1,8 @@
 {
-  "name": "felipeweb11/laravel-easymutators",
+  "name": "webeleven/laravel-easymutators",
   "description": "Value object mutation solution for Laravel 5.",
   "keywords": ["photo", "image", "upload", "laravel", "eloquent", "value object", "mutators"],
-  "homepage": "https://github.com/felipeweb11/laravel-easymutators",
+  "homepage": "https://github.com/webeleven/laravel-easymutators",
   "require": {
     "php": ">=5.4.0",
     "laravel/framework": "^5.1",

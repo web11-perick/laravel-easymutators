@@ -17,19 +17,17 @@ class TempFileUploader
         return tempnam(sys_get_temp_dir(), md5(uniqid(rand(1, 1000))));
     }
 
-    /**
+   /**
      * @param $file
      * @return File
      */
     private function normalizeFile($file)
     {
-
         if ($file instanceof File) {
 
             return $file;
 
         } else if (is_string($file) && filter_var($file, FILTER_VALIDATE_URL)) {
-
             $path = $this->getNewTempFileName();
 
             $data = file_get_contents($file);
@@ -41,6 +39,14 @@ class TempFileUploader
             $path = $this->getNewTempFileName();
 
             $data = base64_decode($this->sanitizeBase64Image($file));
+
+            file_put_contents($path, $data);
+
+            return new File($path);
+        } else if ($this->isBase64Video($file)){
+            $path = $this->getNewTempFileName();
+
+            $data = base64_decode($this->sanitizeBase64Video($file));
 
             file_put_contents($path, $data);
 
@@ -75,10 +81,48 @@ class TempFileUploader
         if (!in_array($format, $allow)) {
             return false;
         }
+
         // check base64 format
-        if (!preg_match('%^[a-zA-Z0-9/+]*={0,2}$%', $explode[1])) {
+        if (base64_encode(base64_decode($explode[1], true)) !== $explode[1]) {
             return false;
         }
+
+        return true;
+
+
+    }
+
+    public function sanitizeBase64Video($file)
+    {
+        return str_replace("data:video/gif;base64,", "", str_replace("data:video/mp4;base64,", "", $file));
+    }
+
+    public function isBase64Video($file)
+    {
+
+        $explode = explode(',', $file);
+        $allow = ['mp4', 'gif'];
+        $format = str_replace(
+            [
+                'data:video/',
+                ';',
+                'base64',
+            ],
+            [
+                '', '', '',
+            ],
+            $explode[0]
+        );
+        // check file format
+        if (!in_array($format, $allow)) {
+            return false;
+        }
+
+        // check base64 format
+        if (base64_encode(base64_decode($explode[1], true)) !== $explode[1]) {
+            return false;
+        }
+        
         return true;
 
 
