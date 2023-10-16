@@ -3,14 +3,20 @@
   "description": "Value object mutation solution for Laravel 5.",
   "keywords": ["photo", "image", "upload", "laravel", "eloquent", "value object", "mutators"],
   "homepage": "https://github.com/webeleven/laravel-easymutators",
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/webeleven/eloquent-value-object"
+    }
+  ],
   "require": {
     "php": ">=5.4.0",
-    "laravel/framework": "^5.1",
+    "laravel/framework": "^5.1|^10.0",
     "intervention/image": "^2.3",
-    "felipeweb11/eloquent-value-object": "^1.1"
+    "webeleven/eloquent-value-object": "^1.0"
   },
   "require-dev": {
-    "phpunit/phpunit" : "^5.7.0"
+    "phpunit/phpunit" : "^9.0"
   },
   "license": "MIT",
   "autoload": {
@@ -37,5 +43,10 @@
       "name": "Thiago",
       "email": "tdrcavallini@gmail.com"
     }
-  ]
+  ],
+  "config": {
+    "allow-plugins": {
+      "kylekatarnls/update-helper": true
+    }
+  }
 }
