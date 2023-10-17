@@ -3,6 +3,7 @@
 namespace Webeleven\EasyMutators\Mapping;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Arr;
 use Webeleven\EasyMutators\ValueObjects\Image;
 
 class ImageMapping extends FileMapping
@@ -39,13 +40,13 @@ class ImageMapping extends FileMapping
         $mapping->setAsConversion();
 
         $mapping->setKey($this->getKey());
-        $mapping->name(array_get($settings, 'name', $this->fileName));
-        $mapping->width(array_get($settings, 'width'));
-        $mapping->height(array_get($settings, 'height'));
-        $mapping->canvasWidth(array_get($settings, 'canvas_width'));
-        $mapping->canvasHeight(array_get($settings, 'canvas_height'));
+        $mapping->name(Arr::get($settings, 'name', $this->fileName));
+        $mapping->width(Arr::get($settings, 'width'));
+        $mapping->height(Arr::get($settings, 'height'));
+        $mapping->canvasWidth(Arr::get($settings, 'canvas_width'));
+        $mapping->canvasHeight(Arr::get($settings, 'canvas_height'));
 
-        $aspectRatio = (bool) array_get($settings, 'aspect_ratio');
+        $aspectRatio = (bool) Arr::get($settings, 'aspect_ratio');
 
         $aspectRatio ? $this->keepAspectRatio() : $this->dontKeepAspectRatio();
 

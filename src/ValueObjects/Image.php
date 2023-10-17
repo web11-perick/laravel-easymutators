@@ -3,6 +3,7 @@
 namespace Webeleven\EasyMutators\ValueObjects;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Arr;
 
 class Image extends File
 {
@@ -51,10 +52,10 @@ class Image extends File
     {
         parent::setData($data);
 
-        $this->width = array_get($data, 'width');
-        $this->height = array_get($data, 'height');
+        $this->width = Arr::get($data, 'width');
+        $this->height = Arr::get($data, 'height');
 
-        collect(array_get($data, 'conversions'))->map(function($image, $name) {
+        collect(Arr::get($data, 'conversions'))->map(function($image, $name) {
             $this->addConversion($name, new static($image));
         });
     }

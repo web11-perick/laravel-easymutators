@@ -2,6 +2,7 @@
 
 namespace Webeleven\EasyMutators\ValueObjects;
 
+use Illuminate\Support\Arr;
 use Webeleven\EasyMutators\MediaService;
 use Webeleven\EloquentValueObject\ValueObject;
 
@@ -35,13 +36,13 @@ class File extends ValueObject
 
     protected function setData(array $data)
     {
-        $this->name = array_get($data, 'name');
-        $this->filename = array_get($data, 'filename');
-        $this->size = array_get($data, 'size');
-        $this->extension = array_get($data, 'extension');
-        $this->path = array_get($data, 'path');
-        $this->basePath = array_get($data, 'basePath');
-        $this->mimeType = array_get($data, 'mimeType');
+        $this->name = Arr::get($data, 'name');
+        $this->filename = Arr::get($data, 'filename');
+        $this->size = Arr::get($data, 'size');
+        $this->extension = Arr::get($data, 'extension');
+        $this->path = Arr::get($data, 'path');
+        $this->basePath = Arr::get($data, 'basePath');
+        $this->mimeType = Arr::get($data, 'mimeType');
     }
 
     /**
